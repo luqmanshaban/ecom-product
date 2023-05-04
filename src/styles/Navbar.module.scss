@@ -1,0 +1,145 @@
+
+@mixin flex($justify) {
+    display: flex;
+    justify-content: $justify;
+    align-items: center;
+    
+}
+
+nav {
+    position: relative;
+    @include flex(space-between);
+    gap: 70px;
+    background-color: white;
+    padding: 10px;
+    animation: navbar 1.2s ease forwards;
+    opacity: 0;
+    #logo {
+        display: none;
+    }
+
+    .hamburger {
+        display: none;
+        cursor: pointer;
+
+        .bar {
+            display: block;
+            margin: 5px;
+            height: 3px;
+            width: 18px;
+            background-color: black;
+            -webkit-transition: 0.7s ease-in-out;
+            transition: 0.7s ease-in-out;
+        }
+    }
+
+    .navMenu {
+        @include flex(space-between);
+        gap: 70px;
+
+        li {
+            a {
+                transition: 0.5s ease;
+                &:hover {
+                    text-decoration: underline 3px;
+                    text-underline-offset: 33px;
+                    text-decoration-color: #D1894B;
+                }
+            }
+        }
+    }
+
+    .rightNav {
+        @include flex(space-between);
+        gap: 20px;
+
+        .cart {
+            .cartIcon {
+                font-size: 40px;
+            }
+        }
+    }
+}
+@keyframes navbar {
+    from {
+        opacity: 0;
+        top: 10px;
+    }to {
+        opacity: 1;
+        top: 0;
+    }
+}
+
+
+//media break points
+@media screen and (max-width: 700px) {
+    nav {
+        gap: 10px !important;
+        #logo {
+            display: block;
+            height: 20px !important;
+        }
+        //hamburger
+        .hamburger {
+            display: block;
+            position: relative;
+            z-index: 9999;
+
+            &.active {
+                .bar:nth-child(2){
+                    opacity: 0;
+                }.bar:nth-child(1){
+                    transform: translateY(8px) rotate(45deg);
+                }.bar:nth-child(3){
+                    transform: translateY(-8px) rotate(-45deg);
+                }
+            }
+        }
+
+        //navMenu
+        .navMenu {
+            .logo {
+                display: none;
+            }
+            
+            width: 50%;
+            display: block;
+            gap: 0;
+            padding: 350px 0 0 20px;
+            position: fixed;
+            left: -200%;
+            transition: 0.7s ease-in-out;
+            background-color: white;
+            height: 100%;
+
+            &.active {
+                left: 0;
+            }
+
+            li {
+                margin: 16px 0;
+
+                a {
+                    font-weight: bolder;
+                    color: black;
+                }
+                
+            }
+        }
+
+        .rightNav {
+            margin-left: 40px;
+            .profile {
+                img{
+                    height: 30px;
+                }
+            }
+            .cart {
+                .cartIcon {
+                    font-size: 20px;
+                }
+            }
+        }
+
+    }
+}
